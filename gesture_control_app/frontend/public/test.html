@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>后端连接测试</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        .test-item {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .success { background-color: #d4edda; border-color: #c3e6cb; }
+        .error { background-color: #f8d7da; border-color: #f5c6cb; }
+        .pending { background-color: #fff3cd; border-color: #ffeaa7; }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        button:hover { background-color: #0056b3; }
+        pre {
+            background: #f4f4f4;
+            padding: 10px;
+            border-radius: 3px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔍 后端服务连接测试</h1>
+    
+    <button onclick="runAllTests()">运行所有测试</button>
+    
+    <div id="test1" class="test-item pending">
+        <h3>测试1: 直接访问后端 (http://localhost:5000/api/health)</h3>
+        <div id="test1-result">等待测试...</div>
+    </div>
+    
+    <div id="test2" class="test-item pending">
+        <h3>测试2: 通过代理访问 (/api/health)</h3>
+        <div id="test2-result">等待测试...</div>
+    </div>
+    
+    <div id="test3" class="test-item pending">
+        <h3>测试3: 获取配置 (/api/config?module=ppt)</h3>
+        <div id="test3-result">等待测试...</div>
+    </div>
+    
+    <div id="test4" class="test-item pending">
+        <h3>测试4: 列出文件 (/api/files/videos)</h3>
+        <div id="test4-result">等待测试...</div>
+    </div>
+
+    <script>
+        async function testDirect() {
+            const div = document.getElementById('test1');
+            const result = document.getElementById('test1-result');
+            
+            try {
+                const response = await fetch('http://localhost:5000/api/health');
+                const data = await response.json();
+                
+                div.className = 'test-item success';
+                result.innerHTML = `
+                    <p>✅ 成功!</p>
+                    <p>状态码: ${response.status}</p>
+                    <pre>${JSON.stringify(data, null, 2)}</pre>
+                `;
+            } catch (error) {
+                div.className = 'test-item error';
+                result.innerHTML = `
+                    <p>❌ 失败!</p>
+                    <p>错误: ${error.message}</p>
+                    <p>可能原因: 后端未启动或CORS问题</p>
+                `;
+            }
+        }
+        
+        async function testProxy() {
+            const div = document.getElementById('test2');
+            const result = document.getElementById('test2-result');
+            
+            try {
+                const response = await fetch('/api/health');
+                const data = await response.json();
+                
+                div.className = 'test-item success';
+                result.innerHTML = `
+                    <p>✅ 成功!</p>
+                    <p>状态码: ${response.status}</p>
+                    <pre>${JSON.stringify(data, null, 2)}</pre>
+                `;
+            } catch (error) {
+                div.className = 'test-item error';
+                result.innerHTML = `
+                    <p>❌ 失败!</p>
+                    <p>错误: ${error.message}</p>
+                    <p>可能原因: Vite代理配置问题</p>
+                `;
+            }
+        }
+        
+        async function testConfig() {
+            const div = document.getElementById('test3');
+            const result = document.getElementById('test3-result');
+            
+            try {
+                const response = await fetch('/api/config?module=ppt');
+                const data = await response.json();
+                
+                div.className = 'test-item success';
+                result.innerHTML = `
+                    <p>✅ 成功!</p>
+                    <p>状态码: ${response.status}</p>
+                    <pre>${JSON.stringify(data, null, 2).substring(0, 500)}...</pre>
+                `;
+            } catch (error) {
+                div.className = 'test-item error';
+                result.innerHTML = `
+                    <p>❌ 失败!</p>
+                    <p>错误: ${error.message}</p>
+                `;
+            }
+        }
+        
+        async function testFiles() {
+            const div = document.getElementById('test4');
+            const result = document.getElementById('test4-result');
+            
+            try {
+                const response = await fetch('/api/files/videos');
+                const data = await response.json();
+                
+                div.className = 'test-item success';
+                result.innerHTML = `
+                    <p>✅ 成功!</p>
+                    <p>状态码: ${response.status}</p>
+                    <pre>${JSON.stringify(data, null, 2)}</pre>
+                `;
+            } catch (error) {
+                div.className = 'test-item error';
+                result.innerHTML = `
+                    <p>❌ 失败!</p>
+                    <p>错误: ${error.message}</p>
+                `;
+            }
+        }
+        
+        async function runAllTests() {
+            await testDirect();
+            await new Promise(resolve => setTimeout(resolve, 500));
+            await testProxy();
+            await new Promise(resolve => setTimeout(resolve, 500));
+            await testConfig();
+            await new Promise(resolve => setTimeout(resolve, 500));
+            await testFiles();
+        }
+        
+        // 页面加载时自动运行
+        window.onload = runAllTests;
+    </script>
+</body>
+</html>
+

@@ -71,14 +71,14 @@ def main():
     point_history_classifier = PointHistoryClassifier()
 
     # ラベル読み込み ###########################################################
-    with open('model/keypoint_classifier/keypoint_classifier_label.csv',
+    with open('model/keypoint_classifier/static_gesture_model/avazahedi/keypoint_classifier_label.csv',
               encoding='utf-8-sig') as f:
         keypoint_classifier_labels = csv.reader(f)
         keypoint_classifier_labels = [
             row[0] for row in keypoint_classifier_labels
         ]
     with open(
-            'model/point_history_classifier/point_history_classifier_label.csv',
+            'model/point_history_classifier/dynamic_gesture_model/NUM_CLASSES_7/point_history_classifier_label.csv',
             encoding='utf-8-sig') as f:
         point_history_classifier_labels = csv.reader(f)
         point_history_classifier_labels = [
@@ -281,13 +281,13 @@ def pre_process_point_history(image, point_history):
 def logging_csv(number, mode, landmark_list, point_history_list):
     if mode == 0:
         pass
-    if mode == 1 and (0 <= number <= 9):
-        csv_path = 'model/keypoint_classifier/keypoint.csv'
+    if mode == 1 and (0 <= number <= 9):                #静态手势训练数据采集
+        csv_path = 'model/keypoint_classifier/keypoint.csv'     #保存路径,注意修改保存路径,同时数据要与 *_classifier_label.csv 标签对应
         with open(csv_path, 'a', newline="") as f:
             writer = csv.writer(f)
             writer.writerow([number, *landmark_list])
-    if mode == 2 and (0 <= number <= 9):
-        csv_path = 'model/point_history_classifier/point_history.csv'
+    if mode == 2 and (0 <= number <= 9):                #动态手势训练数据采集
+        csv_path = 'model/point_history_classifier/point_history.csv'   #保存路径
         with open(csv_path, 'a', newline="") as f:
             writer = csv.writer(f)
             writer.writerow([number, *point_history_list])

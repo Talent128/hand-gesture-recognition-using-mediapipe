@@ -1,0 +1,48 @@
+{
+  "ppt": {
+    "gestures": {
+      "Thumbs Down": "next_slide",
+      "Thumbs Up": "prev_slide",
+      "Open": "first_slide",
+      "Close": "last_slide",
+      "Move Up": "scroll_up",
+      "Move Down": "scroll_down"
+    },
+    "keyboard_shortcuts": {
+      "next_slide": "ArrowRight",
+      "prev_slide": "ArrowLeft",
+      "first_slide": "Home",
+      "last_slide": "End",
+      "scroll_up": "PageUp",
+      "scroll_down": "PageDown"
+    }
+  },
+  "video": {
+    "gestures": {
+      "Open": "play",
+      "Close": "pause",
+      "OK": "restart",
+      "Peace": "fullscreen",
+      "Quiet Coyote": "exit_fullscreen",
+      "Thumbs Up": "volume_up",
+      "Thumbs Down": "volume_down",
+      "Move Left": "seek_backward",
+      "Move Right": "seek_forward",
+      "Clockwise": "speed_up",
+      "Counter Clockwise": "speed_down"
+    },
+    "keyboard_shortcuts": {
+      "play": "Space",
+      "pause": "Space",
+      "restart": "r",
+      "fullscreen": "f",
+      "exit_fullscreen": "Escape",
+      "volume_up": "ArrowUp",
+      "volume_down": "ArrowDown",
+      "seek_backward": "ArrowLeft",
+      "seek_forward": "ArrowRight",
+      "speed_up": ">",
+      "speed_down": "<"
+    }
+  }
+}

@@ -29,7 +29,7 @@ class PointHistoryClassifier(object):
     
     def __init__(
         self,
-        model_path='model/point_history_classifier/point_history_classifier.tflite',        # 默认加载的轨迹分类 TFLite 模型路径
+        model_path='model/point_history_classifier/dynamic_gesture_model/NUM_CLASSES_7/point_history_classifier.tflite',        # 默认加载的轨迹分类 TFLite 模型路径
         score_th=0.5,           # 分类分数低于该阈值时视为无效结果（置信度阈值）
         invalid_value=0,        # 未达阈值时返回的兜底类别编号（默认为"Stop"）
         num_threads=1,          # 限定解释器运行所用线程数

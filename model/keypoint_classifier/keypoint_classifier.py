@@ -27,7 +27,7 @@ class KeyPointClassifier(object):
     
     def __init__(
         self,
-        model_path='model/keypoint_classifier/keypoint_classifier.tflite',      # 默认读取的 TFLite 静态手势模型路径
+        model_path='model/keypoint_classifier/static_gesture_model/avazahedi/keypoint_classifier.tflite',      # 默认读取的 TFLite 静态手势模型路径
         num_threads=1,      # 默认使用的推理线程数量（单线程推理）
     ):
         """

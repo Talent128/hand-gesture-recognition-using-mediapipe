@@ -1,0 +1,59 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+*.egg-info/
+dist/
+build/
+
+# Node
+node_modules/
+npm-debug.log
+yarn-error.log
+.pnp.*
+
+# Build
+frontend/dist/
+frontend/.vite/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Config
+config/gesture_mapping.json.bak
+
+# Uploads (除了示例文件)
+assets/videos/*.mp4
+assets/videos/*.avi
+assets/videos/*.mkv
+assets/videos/*.mov
+assets/videos/*.webm
+!assets/videos/movie.mp4
+!assets/videos/README.md
+
+assets/presentations/*.pdf
+assets/presentations/*.ppt
+assets/presentations/*.pptx
+!assets/presentations/11.pptx
+!assets/presentations/README.md
+
+# Logs
+*.log
+logs/
+
+# Environment
+.env
+.env.local
+
